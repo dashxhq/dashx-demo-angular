@@ -1,0 +1,118 @@
+<div class="min-h-screen flex flex-col justify-center py-12 sm:px-6 lg:px-8">
+  <app-form-header>Contact Us</app-form-header>
+  <div *ngIf="error" class="sm:mx-auto sm:w-full sm:max-w-md">
+    <app-alert-box alertMessage="error"></app-alert-box>
+  </div>
+  <div
+    class="sm:mx-auto sm:w-full sm:max-w-md rounded bg-white shadow shadow-md pt-8"
+  >
+    <div class="sm:mx-auto sm:w-full sm:max-w-md pb-8">
+      <div
+        *ngIf="successMessage"
+        class="sm:mx-auto sm:w-full sm:max-w-md text-center py-4 pt-1 px-4 sm:px-6"
+      >
+        <app-success-box successMessage="successMessage"></app-success-box>
+      </div>
+      <div *ngIf="!successMessage" class="py-8 pt-1 px-4 sm:px-10">
+        <form [formGroup]="contactForm" (ngSubmit)="onSubmit()">
+          <div class="mb-6 form-group">
+            <label for="name" class="block text-sm font-medium text-gray-700"
+              >Name</label
+            >
+            <div class="mt-1">
+              <input
+                id="name"
+                class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm form-control"
+                type="text"
+                formControlName="name"
+                required
+              />
+              <span
+                *ngIf="
+                  contactForm.get('name')?.touched &&
+                  !contactForm.get('name')?.value
+                "
+                class="font-medium text-sm text-red-600 mt-1"
+              >
+                Name is required
+              </span>
+            </div>
+          </div>
+
+          <div class="mb-6 form-group">
+            <label for="email" class="block text-sm font-medium text-gray-700"
+              >Email</label
+            >
+            <div class="mt-1">
+              <input
+                id="email"
+                class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm form-control"
+                type="email"
+                formControlName="email"
+                required
+              />
+              <span
+                *ngIf="
+                  contactForm.get('email')?.touched &&
+                  !contactForm.get('email')?.value
+                "
+                class="font-medium text-sm text-red-600 mt-1"
+              >
+                Email is required
+              </span>
+              <span
+                *ngIf="
+                  contactForm.get('email')?.value &&
+                  !contactForm.get('email')?.valid
+                "
+                class="font-medium text-sm text-red-600 mt-1"
+              >
+                Invalid email address
+              </span>
+            </div>
+          </div>
+
+          <div class="mt-1 sm:mt-0 sm:col-span-2">
+            <label
+              for="feedback"
+              class="block text-sm font-medium text-gray-700"
+            >
+              Send us a message
+            </label>
+            <textarea
+              rows="5"
+              class="max-w-lg shadow-sm block w-full px-3 py-2 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm border border-gray-300 rounded-md mt-1"
+              formControlName="feedback"
+            ></textarea>
+            <span
+              *ngIf="
+                contactForm.get('feedback')?.touched &&
+                !contactForm.get('feedback')?.value
+              "
+              class="font-medium text-sm text-red-600 mt-1"
+            >
+              Feedback is required
+            </span>
+          </div>
+          <div class="mt-7">
+            <button
+              class="group relative w-full flex hover:bg-indigo-500 gap-3 justify-center py-2 px-4 border border-transparent text-sm font-medium text-base rounded-md hover:text-white focus:outline-none focus:ring-1 focus:ring-indigo-500 mt-2 transition duration-300 text-indigo-500 bg-indigo-600"
+              type="submit"
+            >
+              <app-loader *ngIf="loading"></app-loader>
+              <p *ngIf="!loading" class="text-white">Submit</p>
+            </button>
+          </div>
+        </form>
+      </div>
+      <div class="text-sm text-center">
+        <a
+          class="font-medium text-indigo-600 hover:text-indigo-500"
+          [routerLink]="['/login']"
+        >
+          Go back
+        </a>
+      </div>
+    </div>
+  </div>
+</div>

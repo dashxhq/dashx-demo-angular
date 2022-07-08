@@ -1,0 +1,144 @@
+<div class="min-h-screen flex flex-col justify-center py-12 sm:px-6 lg:px-8">
+  <app-form-header>Register for an account</app-form-header>
+  <div *ngIf="error" class="sm:mx-auto sm:w-full sm:max-w-md">
+    <app-alert-box alertMessage="error"></app-alert-box>
+  </div>
+  <div
+    class="sm:mx-auto sm:w-full sm:max-w-md rounded bg-white shadow shadow-md"
+  >
+    <div class="sm:mx-auto sm:w-full sm:max-w-md">
+      <div class="py-8 px-4 sm:px-10">
+        <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+          <div class="mb-6 form-group">
+            <label
+              for="firstName"
+              class="block text-sm font-medium text-gray-700"
+              >First Name</label
+            >
+            <div class="mt-1">
+              <input
+                id="firstName"
+                class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm form-control"
+                type="text"
+                formControlName="firstName"
+                required
+              />
+              <span
+                *ngIf="
+                  registerForm.get('firstName')?.touched &&
+                  !registerForm.get('firstName')?.valid
+                "
+                class="font-medium text-sm text-red-600 mt-1"
+              >
+                First Name is required
+              </span>
+            </div>
+          </div>
+
+          <div class="mb-6 form-group">
+            <label
+              for="lastName"
+              class="block text-sm font-medium text-gray-700"
+              >Last Name</label
+            >
+            <div class="mt-1">
+              <input
+                id="lastName"
+                class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm form-control"
+                type="text"
+                formControlName="lastName"
+                required
+              />
+              <span
+                *ngIf="
+                  registerForm.get('lastName')?.touched &&
+                  !registerForm.get('lastName')?.value
+                "
+                class="font-medium text-sm text-red-600 mt-1"
+              >
+                Last Name is required
+              </span>
+            </div>
+          </div>
+
+          <div class="mb-6 form-group">
+            <label for="email" class="block text-sm font-medium text-gray-700"
+              >Email</label
+            >
+            <div class="mt-1">
+              <input
+                id="email"
+                class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm form-control"
+                type="email"
+                formControlName="email"
+                required
+              />
+              <span
+                *ngIf="
+                  registerForm.get('email')?.touched &&
+                  !registerForm.get('email')?.value
+                "
+                class="font-medium text-sm text-red-600 mt-1"
+              >
+                Email is required
+              </span>
+              <span
+                *ngIf="
+                  registerForm.get('email')?.value &&
+                  !registerForm.get('email')?.valid
+                "
+                class="font-medium text-sm text-red-600 mt-1"
+              >
+                Invalid email address
+              </span>
+            </div>
+          </div>
+
+          <div class="mb-6 form-group">
+            <label
+              for="password"
+              class="block text-sm font-medium text-gray-700"
+              >Password</label
+            >
+            <div class="mt-1">
+              <input
+                id="password"
+                class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm form-control"
+                type="password"
+                formControlName="password"
+                required
+              />
+              <span
+                *ngIf="
+                  registerForm.get('password')?.touched &&
+                  !registerForm.get('password')?.valid
+                "
+                class="font-medium text-sm text-red-600 mt-1"
+              >
+                Password is required
+              </span>
+            </div>
+          </div>
+
+          <div class="mt-7">
+            <button
+              class="group relative w-full flex hover:bg-indigo-500 gap-3 justify-center py-2 px-4 border border-transparent text-sm font-medium text-base rounded-md hover:text-white focus:outline-none focus:ring-1 focus:ring-indigo-500 mt-2 transition duration-300 text-indigo-500 bg-indigo-600"
+              type="submit"
+            >
+              <app-loader *ngIf="loading" message="Signing up"></app-loader>
+              <p *ngIf="!loading" class="text-white">Register</p>
+            </button>
+            <a [routerLink]="['/login']">
+              <button
+                class="group relative w-full flex hover:bg-indigo-500 gap-3 justify-center py-2 px-4 border border-transparent text-sm font-medium text-base rounded-md hover:text-white focus:outline-none focus:ring-1 focus:ring-indigo-500 mt-2 transition duration-300 outlined text-indigo-500 border-indigo-500 mt-3"
+                type="submit"
+              >
+                <p class="hover:text-white">Login</p>
+              </button></a
+            >
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
