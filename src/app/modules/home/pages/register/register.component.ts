@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Validators } from '@angular/forms';
 import { FormControl, FormGroup } from '@angular/forms';
+import { ApiService } from 'src/app/core/http/api.service';
 
 @Component({
   selector: 'app-register',
@@ -12,7 +13,7 @@ export class RegisterComponent implements OnInit {
   registerForm: FormGroup;
   loading: boolean = false;
 
-  constructor() {}
+  constructor(private api: ApiService) {}
 
   ngOnInit() {
     this.registerForm = new FormGroup({
@@ -25,5 +26,28 @@ export class RegisterComponent implements OnInit {
 
   onSubmit() {
     console.log(this.registerForm.value);
+    this.error = '';
+    this.loading = true;
+    const { email, password, firstName, lastName } = this.registerForm.value;
+    const requestBody = {
+      first_name: firstName,
+      last_name: lastName,
+      email,
+      password,
+    };
+    this.api.post('/register', requestBody).subscribe({
+      next: (data) => {
+        console.log(data);
+      },
+      error: (error) => {
+        const errorMessage =
+          error.error.response?.data?.message || error.error.message;
+        this.error = errorMessage;
+        this.loading = false;
+      },
+      complete: () => {
+        this.loading = false;
+      },
+    });
   }
 }

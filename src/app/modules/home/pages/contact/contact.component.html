@@ -1,7 +1,7 @@
 <div class="min-h-screen flex flex-col justify-center py-12 sm:px-6 lg:px-8">
   <app-form-header>Contact Us</app-form-header>
   <div *ngIf="error" class="sm:mx-auto sm:w-full sm:max-w-md">
-    <app-alert-box alertMessage="error"></app-alert-box>
+    <app-alert-box [alertMessage]="error"></app-alert-box>
   </div>
   <div
     class="sm:mx-auto sm:w-full sm:max-w-md rounded bg-white shadow shadow-md pt-8"
@@ -11,7 +11,7 @@
         *ngIf="successMessage"
         class="sm:mx-auto sm:w-full sm:max-w-md text-center py-4 pt-1 px-4 sm:px-6"
       >
-        <app-success-box successMessage="successMessage"></app-success-box>
+        <app-success-box [successMessage]="successMessage"></app-success-box>
       </div>
       <div *ngIf="!successMessage" class="py-8 pt-1 px-4 sm:px-10">
         <form [formGroup]="contactForm" (ngSubmit)="onSubmit()">

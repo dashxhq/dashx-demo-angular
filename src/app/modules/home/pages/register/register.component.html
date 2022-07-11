@@ -1,7 +1,7 @@
 <div class="min-h-screen flex flex-col justify-center py-12 sm:px-6 lg:px-8">
   <app-form-header>Register for an account</app-form-header>
   <div *ngIf="error" class="sm:mx-auto sm:w-full sm:max-w-md">
-    <app-alert-box alertMessage="error"></app-alert-box>
+    <app-alert-box [alertMessage]="error"></app-alert-box>
   </div>
   <div
     class="sm:mx-auto sm:w-full sm:max-w-md rounded bg-white shadow shadow-md"
