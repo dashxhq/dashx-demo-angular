@@ -13,6 +13,7 @@ export class ForgotPasswordComponent implements OnInit {
   successMessage: string | undefined;
   forgotPasswordForm: FormGroup;
   loading: boolean = false;
+  submit: boolean = false;
 
   constructor(private api: ApiService) {}
 
@@ -23,14 +24,17 @@ export class ForgotPasswordComponent implements OnInit {
   }
 
   onSubmit() {
+    this.submit = true;
+    if (this.forgotPasswordForm.invalid) {
+      return;
+    }
     this.error = '';
     this.loading = true;
     this.successMessage = '';
     const requestBody = this.forgotPasswordForm.value;
     this.api.post('/forgot-password', requestBody).subscribe({
-      next: (data) => {
-        console.log(data);
-        //this.successMessage = data.message
+      next: (data: any) => {
+        this.successMessage = data.message;
       },
       error: (error) => {
         const errorMessage =

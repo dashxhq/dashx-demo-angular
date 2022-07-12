@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Validators } from '@angular/forms';
 import { FormControl, FormGroup } from '@angular/forms';
+import { Router } from '@angular/router';
 import { ApiService } from 'src/app/core/http/api.service';
 
 @Component({
@@ -12,8 +13,9 @@ export class RegisterComponent implements OnInit {
   error: string | undefined;
   registerForm: FormGroup;
   loading: boolean = false;
+  submit: boolean = false;
 
-  constructor(private api: ApiService) {}
+  constructor(private api: ApiService, private router: Router) {}
 
   ngOnInit() {
     this.registerForm = new FormGroup({
@@ -25,7 +27,10 @@ export class RegisterComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log(this.registerForm.value);
+    this.submit = true;
+    if (this.registerForm.invalid) {
+      return;
+    }
     this.error = '';
     this.loading = true;
     const { email, password, firstName, lastName } = this.registerForm.value;
@@ -36,8 +41,8 @@ export class RegisterComponent implements OnInit {
       password,
     };
     this.api.post('/register', requestBody).subscribe({
-      next: (data) => {
-        console.log(data);
+      next: (data: any) => {
+        this.router.navigate(['/login']);
       },
       error: (error) => {
         const errorMessage =

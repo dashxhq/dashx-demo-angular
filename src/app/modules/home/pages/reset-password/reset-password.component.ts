@@ -14,6 +14,7 @@ export class ResetPasswordComponent implements OnInit {
   resetPasswordForm: FormGroup;
   loading: boolean = false;
   resetPasswordToken: string = 'abc';
+  submit: boolean = false;
 
   constructor(private api: ApiService) {}
 
@@ -25,6 +26,10 @@ export class ResetPasswordComponent implements OnInit {
   }
 
   onSubmit() {
+    this.submit = true;
+    if (this.resetPasswordForm.invalid) {
+      return;
+    }
     this.error = '';
     this.loading = true;
     this.successMessage = '';
@@ -33,9 +38,8 @@ export class ResetPasswordComponent implements OnInit {
       password: this.resetPasswordForm.value.password,
     };
     this.api.post('/reset-password', requestBody).subscribe({
-      next: (data) => {
-        console.log(data);
-        //this.successMessage = data.message
+      next: (data: any) => {
+        this.successMessage = data.message;
       },
       error: (error) => {
         const errorMessage =

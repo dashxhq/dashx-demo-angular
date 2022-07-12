@@ -15,7 +15,6 @@ export class AuthInterceptorService implements HttpInterceptor {
     req: HttpRequest<any>,
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
-    console.log('check ehere');
     const apiReq = req.clone({
       url: `https://node.dashxdemo.com${req.url}`,
       headers: req.headers.append('Content-Type', 'application/json'),

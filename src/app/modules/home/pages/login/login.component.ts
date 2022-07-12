@@ -12,6 +12,7 @@ export class LoginComponent implements OnInit {
   error: string | undefined;
   loading: boolean = false;
   loginForm: FormGroup;
+  submit: boolean = false;
 
   constructor(private api: ApiService) {}
 
@@ -23,6 +24,10 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit() {
+    this.submit = true;
+    if (this.loginForm.invalid) {
+      return;
+    }
     this.error = '';
     this.loading = true;
     const requestBody = this.loginForm.value;

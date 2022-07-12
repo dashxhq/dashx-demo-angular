@@ -29,8 +29,9 @@
               />
               <span
                 *ngIf="
-                  contactForm.get('name')?.touched &&
-                  !contactForm.get('name')?.value
+                  (contactForm.get('name')?.touched &&
+                    !contactForm.get('name')?.value) ||
+                  (submit && !contactForm.get('name')?.value)
                 "
                 class="font-medium text-sm text-red-600 mt-1"
               >
@@ -53,8 +54,9 @@
               />
               <span
                 *ngIf="
-                  contactForm.get('email')?.touched &&
-                  !contactForm.get('email')?.value
+                  (contactForm.get('email')?.touched &&
+                    !contactForm.get('email')?.value) ||
+                  (submit && !contactForm.get('email')?.value)
                 "
                 class="font-medium text-sm text-red-600 mt-1"
               >
@@ -86,8 +88,9 @@
             ></textarea>
             <span
               *ngIf="
-                contactForm.get('feedback')?.touched &&
-                !contactForm.get('feedback')?.value
+                (contactForm.get('feedback')?.touched &&
+                  !contactForm.get('feedback')?.value) ||
+                (submit && !contactForm.get('feedback')?.value)
               "
               class="font-medium text-sm text-red-600 mt-1"
             >
@@ -98,6 +101,7 @@
             <button
               class="group relative w-full flex hover:bg-indigo-500 gap-3 justify-center py-2 px-4 border border-transparent text-sm font-medium text-base rounded-md hover:text-white focus:outline-none focus:ring-1 focus:ring-indigo-500 mt-2 transition duration-300 text-indigo-500 bg-indigo-600"
               type="submit"
+              [disabled]="loading"
             >
               <app-loader *ngIf="loading"></app-loader>
               <p *ngIf="!loading" class="text-white">Submit</p>

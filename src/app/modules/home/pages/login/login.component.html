@@ -23,8 +23,9 @@
               />
               <span
                 *ngIf="
-                  loginForm.get('email')?.touched &&
-                  !loginForm.get('email')?.value
+                  (loginForm.get('email')?.touched &&
+                    !loginForm.get('email')?.value) ||
+                  (submit && !loginForm.get('email')?.value)
                 "
                 class="font-medium text-sm text-red-600 mt-1"
               >
@@ -58,8 +59,9 @@
               />
               <span
                 *ngIf="
-                  loginForm.get('password')?.touched &&
-                  !loginForm.get('password')?.valid
+                  (loginForm.get('password')?.touched &&
+                    !loginForm.get('password')?.valid) ||
+                  (submit && !loginForm.get('password')?.value)
                 "
                 class="font-medium text-sm text-red-600 mt-1"
               >
@@ -93,6 +95,7 @@
             <button
               class="group relative w-full flex hover:bg-indigo-500 gap-3 justify-center py-2 px-4 border border-transparent text-sm font-medium text-base rounded-md hover:text-white focus:outline-none focus:ring-1 focus:ring-indigo-500 mt-2 transition duration-300 text-indigo-500 bg-indigo-600"
               type="submit"
+              [disabled]="loading"
             >
               <app-loader *ngIf="loading" message="Logging in"></app-loader>
               <p *ngIf="!loading" class="text-white">Login</p>

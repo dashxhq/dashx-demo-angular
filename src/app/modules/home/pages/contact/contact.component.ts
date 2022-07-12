@@ -13,6 +13,7 @@ export class ContactComponent implements OnInit {
   successMessage: string | undefined;
   contactForm: FormGroup;
   loading: boolean = false;
+  submit: boolean = false;
 
   constructor(private api: ApiService) {}
 
@@ -25,14 +26,17 @@ export class ContactComponent implements OnInit {
   }
 
   onSubmit() {
+    this.submit = true;
+    if (this.contactForm.invalid) {
+      return;
+    }
     this.error = '';
     this.loading = true;
     this.successMessage = '';
     const requestBody = this.contactForm.value;
     this.api.post('/contact', requestBody).subscribe({
-      next: (data) => {
-        console.log(data);
-        //this.successMessage = data.message
+      next: (data: any) => {
+        this.successMessage = data.message;
       },
       error: (error) => {
         console.log(error);

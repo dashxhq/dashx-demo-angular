@@ -25,8 +25,9 @@
               />
               <span
                 *ngIf="
-                  registerForm.get('firstName')?.touched &&
-                  !registerForm.get('firstName')?.valid
+                  (registerForm.get('firstName')?.touched &&
+                    !registerForm.get('firstName')?.valid) ||
+                  (submit && !registerForm.get('firstName')?.value)
                 "
                 class="font-medium text-sm text-red-600 mt-1"
               >
@@ -51,8 +52,9 @@
               />
               <span
                 *ngIf="
-                  registerForm.get('lastName')?.touched &&
-                  !registerForm.get('lastName')?.value
+                  (registerForm.get('lastName')?.touched &&
+                    !registerForm.get('lastName')?.value) ||
+                  (submit && !registerForm.get('lastName')?.value)
                 "
                 class="font-medium text-sm text-red-600 mt-1"
               >
@@ -75,8 +77,9 @@
               />
               <span
                 *ngIf="
-                  registerForm.get('email')?.touched &&
-                  !registerForm.get('email')?.value
+                  (registerForm.get('email')?.touched &&
+                    !registerForm.get('email')?.value) ||
+                  (submit && !registerForm.get('email')?.value)
                 "
                 class="font-medium text-sm text-red-600 mt-1"
               >
@@ -110,8 +113,9 @@
               />
               <span
                 *ngIf="
-                  registerForm.get('password')?.touched &&
-                  !registerForm.get('password')?.valid
+                  (registerForm.get('password')?.touched &&
+                    !registerForm.get('password')?.valid) ||
+                  (submit && !registerForm.get('password')?.value)
                 "
                 class="font-medium text-sm text-red-600 mt-1"
               >
@@ -124,6 +128,7 @@
             <button
               class="group relative w-full flex hover:bg-indigo-500 gap-3 justify-center py-2 px-4 border border-transparent text-sm font-medium text-base rounded-md hover:text-white focus:outline-none focus:ring-1 focus:ring-indigo-500 mt-2 transition duration-300 text-indigo-500 bg-indigo-600"
               type="submit"
+              [disabled]="loading"
             >
               <app-loader *ngIf="loading" message="Signing up"></app-loader>
               <p *ngIf="!loading" class="text-white">Register</p>
