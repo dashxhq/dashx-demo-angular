@@ -1,20 +1,23 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Validators } from '@angular/forms';
 import { FormControl, FormGroup } from '@angular/forms';
+import { Subscription } from 'rxjs';
 import { ApiService } from 'src/app/core/http/api.service';
+import { AuthService } from 'src/app/core/services/auth.service';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css'],
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent implements OnInit, OnDestroy {
   error: string | undefined;
   loading: boolean = false;
   loginForm: FormGroup;
   submit: boolean = false;
+  subscription: Subscription;
 
-  constructor(private api: ApiService) {}
+  constructor(private api: ApiService, private auth: AuthService) {}
 
   ngOnInit() {
     this.loginForm = new FormGroup({
@@ -31,8 +34,9 @@ export class LoginComponent implements OnInit {
     this.error = '';
     this.loading = true;
     const requestBody = this.loginForm.value;
-    this.api.post('/login', requestBody).subscribe({
-      next: (data) => {
+    this.subscription = this.api.post('/login', requestBody).subscribe({
+      next: (data: any) => {
+        this.auth.login(data.token)
         console.log(data);
       },
       error: (error) => {
@@ -45,5 +49,11 @@ export class LoginComponent implements OnInit {
         this.loading = false;
       },
     });
+  }
+
+  ngOnDestroy() {
+    if (this.subscription) {
+      this.subscription.unsubscribe();
+    }
   }
 }

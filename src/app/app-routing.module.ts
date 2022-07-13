@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { NoAuthGuard } from './core/guard/no-auth.guard';
 import { ContactComponent } from './modules/home/pages/contact/contact.component';
 import { ForgotPasswordComponent } from './modules/home/pages/forgot-password/forgot-password.component';
 import { LoginComponent } from './modules/home/pages/login/login.component';
@@ -7,10 +8,11 @@ import { RegisterComponent } from './modules/home/pages/register/register.compon
 import { ResetPasswordComponent } from './modules/home/pages/reset-password/reset-password.component';
 
 const routes: Routes = [
-  { path: 'login', component: LoginComponent },
-  { path: 'register', component: RegisterComponent },
-  { path: 'forgot-password', component: ForgotPasswordComponent },
-  { path: 'reset-password', component: ResetPasswordComponent },
+  { path: '', redirectTo: '/login', pathMatch: 'full' },
+  { path: 'login', component: LoginComponent, canActivate: [NoAuthGuard] },
+  { path: 'register', component: RegisterComponent, canActivate: [NoAuthGuard] },
+  { path: 'forgot-password', component: ForgotPasswordComponent, canActivate: [NoAuthGuard] },
+  { path: 'reset-password', component: ResetPasswordComponent, canActivate: [NoAuthGuard] },
   { path: 'contact', component: ContactComponent },
 ];
 

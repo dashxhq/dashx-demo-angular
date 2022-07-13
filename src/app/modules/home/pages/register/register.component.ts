@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Validators } from '@angular/forms';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { ApiService } from 'src/app/core/http/api.service';
 
 @Component({
@@ -9,11 +10,12 @@ import { ApiService } from 'src/app/core/http/api.service';
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.css'],
 })
-export class RegisterComponent implements OnInit {
+export class RegisterComponent implements OnInit, OnDestroy {
   error: string | undefined;
   registerForm: FormGroup;
   loading: boolean = false;
   submit: boolean = false;
+  subscription: Subscription;
 
   constructor(private api: ApiService, private router: Router) {}
 
@@ -40,7 +42,7 @@ export class RegisterComponent implements OnInit {
       email,
       password,
     };
-    this.api.post('/register', requestBody).subscribe({
+    this.subscription = this.api.post('/register', requestBody).subscribe({
       next: (data: any) => {
         this.router.navigate(['/login']);
       },
@@ -54,5 +56,11 @@ export class RegisterComponent implements OnInit {
         this.loading = false;
       },
     });
+  }
+
+  ngOnDestroy() {
+    if (this.subscription) {
+      this.subscription.unsubscribe();
+    }
   }
 }

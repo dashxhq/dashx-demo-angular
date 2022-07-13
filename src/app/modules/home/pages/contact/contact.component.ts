@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Validators } from '@angular/forms';
 import { FormControl, FormGroup } from '@angular/forms';
+import { Subscription } from 'rxjs';
 import { ApiService } from 'src/app/core/http/api.service';
 
 @Component({
@@ -8,12 +9,13 @@ import { ApiService } from 'src/app/core/http/api.service';
   templateUrl: './contact.component.html',
   styleUrls: ['./contact.component.css'],
 })
-export class ContactComponent implements OnInit {
+export class ContactComponent implements OnInit, OnDestroy {
   error: string | undefined;
   successMessage: string | undefined;
   contactForm: FormGroup;
   loading: boolean = false;
   submit: boolean = false;
+  subscription: Subscription;
 
   constructor(private api: ApiService) {}
 
@@ -34,7 +36,7 @@ export class ContactComponent implements OnInit {
     this.loading = true;
     this.successMessage = '';
     const requestBody = this.contactForm.value;
-    this.api.post('/contact', requestBody).subscribe({
+    this.subscription = this.api.post('/contact', requestBody).subscribe({
       next: (data: any) => {
         this.successMessage = data.message;
       },
@@ -48,5 +50,11 @@ export class ContactComponent implements OnInit {
         this.loading = false;
       },
     });
+  }
+
+  ngOnDestroy() {
+    if (this.subscription) {
+      this.subscription.unsubscribe();
+    }
   }
 }
