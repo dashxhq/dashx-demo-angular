@@ -8,21 +8,28 @@ import { DashxService } from './dashx.service';
 })
 export class AuthService {
   token: string;
-  user = new Subject<object | null>();
+  currentUser: any;
 
-  constructor(private dashx: DashxService) {}
+  constructor(private dashxService: DashxService) {}
 
-  login(jwtToken: string) {
+  get isLoggedIn(): boolean {
+    return !!this.currentUser;
+  }
+
+  login(jwtToken: string, rememberMe: Boolean) {
     localStorage.setItem('jwt-token', jwtToken)
     const decodedToken: any = jwtDecode(jwtToken)
     const dashxToken = decodedToken.dashx_token
     const decodedUser = decodedToken.user
-    //this.dashx.setIdentity(decodedUser.id, dashxToken)
-    this.user.next(decodedUser)
+    this.dashxService.dashx.setIdentity(decodedUser.id, dashxToken)
+    this.currentUser = decodedUser
+    if (rememberMe) {
+      localStorage.setItem('user', JSON.stringify(this.currentUser))
+    }
   }
 
   logout() {
     localStorage.removeItem('jwt-token')
-    this.user.next(null)
+    this.currentUser = null
   }
 }

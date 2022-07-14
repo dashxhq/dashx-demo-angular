@@ -6,8 +6,9 @@ import { environment } from '../../../environments/environment';
   providedIn: 'root',
 })
 export class DashxService {
+  dashx: any
   constructor() {
-    DashX({
+    this.dashx = DashX({
       baseUri: environment.DASHX_BASE_URI,
       publicKey: environment.DASHX_PUBLIC_KEY,
       targetEnvironment: environment.DASHX_TARGET_ENVIRONMENT,

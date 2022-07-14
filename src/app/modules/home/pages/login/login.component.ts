@@ -1,6 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Validators } from '@angular/forms';
 import { FormControl, FormGroup } from '@angular/forms';
+import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { ApiService } from 'src/app/core/http/api.service';
 import { AuthService } from 'src/app/core/services/auth.service';
@@ -17,12 +18,17 @@ export class LoginComponent implements OnInit, OnDestroy {
   submit: boolean = false;
   subscription: Subscription;
 
-  constructor(private api: ApiService, private auth: AuthService) {}
+  constructor(
+    private api: ApiService,
+    private auth: AuthService,
+    private router: Router
+  ) {}
 
   ngOnInit() {
     this.loginForm = new FormGroup({
       email: new FormControl(null, [Validators.required, Validators.email]),
       password: new FormControl(null, Validators.required),
+      rememberMe: new FormControl(false)
     });
   }
 
@@ -36,8 +42,7 @@ export class LoginComponent implements OnInit, OnDestroy {
     const requestBody = this.loginForm.value;
     this.subscription = this.api.post('/login', requestBody).subscribe({
       next: (data: any) => {
-        this.auth.login(data.token)
-        console.log(data);
+        this.auth.login(data.token, requestBody.rememberMe);
       },
       error: (error) => {
         const errorMessage =
@@ -47,6 +52,7 @@ export class LoginComponent implements OnInit, OnDestroy {
       },
       complete: () => {
         this.loading = false;
+        this.router.navigate(['/home']);
       },
     });
   }

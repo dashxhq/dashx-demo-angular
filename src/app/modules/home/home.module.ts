@@ -9,6 +9,7 @@ import { ContactComponent } from './pages/contact/contact.component';
 import { ResetPasswordComponent } from './pages/reset-password/reset-password.component';
 import { RouterModule } from '@angular/router';
 import { CoreModule } from 'src/app/core/core.module';
+import { HomeComponent } from './pages/home/home.component';
 
 @NgModule({
   declarations: [
@@ -17,6 +18,7 @@ import { CoreModule } from 'src/app/core/core.module';
     ForgotPasswordComponent,
     ContactComponent,
     ResetPasswordComponent,
+    HomeComponent,
   ],
   imports: [
     CommonModule,
@@ -31,6 +33,7 @@ import { CoreModule } from 'src/app/core/core.module';
     ForgotPasswordComponent,
     ContactComponent,
     ResetPasswordComponent,
+    HomeComponent,
   ],
 })
 export class HomeModule {}
