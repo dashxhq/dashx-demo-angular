@@ -10,6 +10,7 @@ import { ResetPasswordComponent } from './pages/reset-password/reset-password.co
 import { RouterModule } from '@angular/router';
 import { CoreModule } from 'src/app/core/core.module';
 import { HomeComponent } from './pages/home/home.component';
+import { DashboardComponent } from './layouts/dashboard/dashboard.component';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { HomeComponent } from './pages/home/home.component';
     ContactComponent,
     ResetPasswordComponent,
     HomeComponent,
+    DashboardComponent,
   ],
   imports: [
     CommonModule,

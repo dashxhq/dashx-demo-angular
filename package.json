@@ -21,6 +21,7 @@
     "@angular/platform-browser-dynamic": "^14.0.0",
     "@angular/router": "^14.0.0",
     "@dashx/browser": "^0.1.23",
+    "dayjs": "^1.11.4",
     "jwt-decode": "^3.1.2",
     "ng-heroicon": "^2.1.0",
     "rxjs": "~7.5.0",

@@ -5,10 +5,24 @@ import { AlertBoxComponent } from './components/alert-box/alert-box.component';
 import { SuccessBoxComponent } from './components/success-box/success-box.component';
 import { LoaderComponent } from './components/loader/loader.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
-import { menuAlt2, search, bell, HeroIconModule } from 'ng-heroicon';
+import {
+  menuAlt2,
+  search,
+  bell,
+  home,
+  bookmark,
+  currencyDollar,
+  database,
+  x,
+  informationCircle,
+  HeroIconModule,
+} from 'ng-heroicon';
 import { MatMenuModule } from '@angular/material/menu';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { MatSidenavModule } from '@angular/material/sidenav';
+import { ErrorBoxComponent } from './components/error-box/error-box.component';
+import { EmptyPageComponent } from './components/empty-page/empty-page.component';
+import { PostComponent } from './components/post/post.component';
 
 @NgModule({
   declarations: [
@@ -18,6 +32,9 @@ import { MatSidenavModule } from '@angular/material/sidenav';
     LoaderComponent,
     NavbarComponent,
     SidebarComponent,
+    ErrorBoxComponent,
+    EmptyPageComponent,
+    PostComponent,
   ],
   imports: [
     CommonModule,
@@ -26,6 +43,12 @@ import { MatSidenavModule } from '@angular/material/sidenav';
         menuAlt2,
         search,
         bell,
+        home,
+        database,
+        bookmark,
+        currencyDollar,
+        x,
+        informationCircle,
       },
       {
         /**
@@ -45,6 +68,9 @@ import { MatSidenavModule } from '@angular/material/sidenav';
     LoaderComponent,
     NavbarComponent,
     SidebarComponent,
+    ErrorBoxComponent,
+    EmptyPageComponent,
+    PostComponent,
   ],
 })
 export class SharedModule {}
