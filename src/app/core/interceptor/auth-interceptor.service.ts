@@ -4,6 +4,7 @@ import {
   HttpRequest,
   HttpHandler,
   HttpEvent,
+  HttpHeaders,
 } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
@@ -15,9 +16,21 @@ export class AuthInterceptorService implements HttpInterceptor {
     req: HttpRequest<any>,
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
+    let headers;
+    const jwtToken = localStorage.getItem('jwt-token');
+    if (jwtToken) {
+      headers = new HttpHeaders({
+        Authorization: `Bearer ${jwtToken}`,
+        'Content-Type': 'application/json',
+      });
+    } else {
+      headers = new HttpHeaders({
+        'Content-Type': 'application/json',
+      });
+    }
     const apiReq = req.clone({
       url: `https://node.dashxdemo.com${req.url}`,
-      headers: req.headers.append('Content-Type', 'application/json'),
+      headers: headers,
     });
     return next.handle(apiReq);
   }

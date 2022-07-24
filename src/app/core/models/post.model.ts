@@ -8,3 +8,8 @@ export interface Post {
   };
   id?: string;
 }
+
+export interface ModalData {
+  handleSubmit: Function;
+  loading: boolean;
+}

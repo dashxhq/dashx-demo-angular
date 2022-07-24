@@ -13,7 +13,7 @@ export class PostComponent implements OnInit {
   published: any;
   constructor() {
     dayjs.extend(relativeTime);
-    this.published = dayjs(this.post.created_at).fromNow();
+    this.published = dayjs(this.post?.created_at).fromNow();
   }
 
   ngOnInit(): void {}

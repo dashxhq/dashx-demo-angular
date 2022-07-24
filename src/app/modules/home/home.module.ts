@@ -11,6 +11,11 @@ import { RouterModule } from '@angular/router';
 import { CoreModule } from 'src/app/core/core.module';
 import { HomeComponent } from './pages/home/home.component';
 import { DashboardComponent } from './layouts/dashboard/dashboard.component';
+import { StoreComponent } from './pages/store/store.component';
+import { BookmarksComponent } from './pages/bookmarks/bookmarks.component';
+import { BillingComponent } from './pages/billing/billing.component';
+import { ProfileComponent } from './pages/profile/profile.component';
+import { SettingsComponent } from './pages/settings/settings.component';
 
 @NgModule({
   declarations: [
@@ -21,6 +26,11 @@ import { DashboardComponent } from './layouts/dashboard/dashboard.component';
     ResetPasswordComponent,
     HomeComponent,
     DashboardComponent,
+    StoreComponent,
+    BookmarksComponent,
+    BillingComponent,
+    ProfileComponent,
+    SettingsComponent,
   ],
   imports: [
     CommonModule,

@@ -23,6 +23,10 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { ErrorBoxComponent } from './components/error-box/error-box.component';
 import { EmptyPageComponent } from './components/empty-page/empty-page.component';
 import { PostComponent } from './components/post/post.component';
+import { ModalComponent } from './components/modal/modal.component';
+import { MatDialogModule } from '@angular/material/dialog';
+import { ReactiveFormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [
@@ -35,6 +39,7 @@ import { PostComponent } from './components/post/post.component';
     ErrorBoxComponent,
     EmptyPageComponent,
     PostComponent,
+    ModalComponent,
   ],
   imports: [
     CommonModule,
@@ -60,6 +65,9 @@ import { PostComponent } from './components/post/post.component';
     ),
     MatMenuModule,
     MatSidenavModule,
+    MatDialogModule,
+    ReactiveFormsModule,
+    RouterModule,
   ],
   exports: [
     AlertBoxComponent,
@@ -71,6 +79,7 @@ import { PostComponent } from './components/post/post.component';
     ErrorBoxComponent,
     EmptyPageComponent,
     PostComponent,
+    ModalComponent,
   ],
 })
 export class SharedModule {}

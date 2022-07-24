@@ -33,8 +33,9 @@
         <div class="flex-1 flex flex-col overflow-y-auto">
           <nav class="flex-1 px-2 py-4 space-y-1">
             <a
-              class="bg-gray-900 text-white flex px-2 rounded-md text-base font-medium py-2"
-              href="/"
+              class="text-gray-300 hover:bg-gray-700 hover:text-white flex px-2 rounded-md text-base font-medium py-2"
+              [routerLink]="['/']"
+              routerLinkActive="active"
               aria-current="page"
             >
               <hero-icon
@@ -47,7 +48,8 @@
             >
             <a
               class="text-gray-300 hover:bg-gray-700 hover:text-white flex px-2 rounded-md text-base font-medium py-2"
-              href="/store"
+              [routerLink]="['/store']"
+              routerLinkActive="active"
               ><hero-icon
                 name="database"
                 hostDisplay="inlineBlock"
@@ -58,7 +60,8 @@
             >
             <a
               class="text-gray-300 hover:bg-gray-700 hover:text-white flex px-2 rounded-md text-base font-medium py-2"
-              href="/bookmarks"
+              [routerLink]="['/bookmarks']"
+              routerLinkActive="active"
               ><hero-icon
                 name="bookmark"
                 hostDisplay="inlineBlock"
@@ -69,7 +72,8 @@
             >
             <a
               class="text-gray-300 hover:bg-gray-700 hover:text-white flex px-2 rounded-md text-base font-medium py-2"
-              href="/billing"
+              [routerLink]="['/billing']"
+              routerLinkActive="active"
               ><hero-icon
                 name="currency-dollar"
                 hostDisplay="inlineBlock"
