@@ -1,0 +1,60 @@
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Validators } from '@angular/forms';
+import { FormControl, FormGroup } from '@angular/forms';
+import { Subscription } from 'rxjs';
+import { ApiService } from 'src/app/core/http/api.service';
+
+@Component({
+  selector: 'app-contact',
+  templateUrl: './contact.component.html',
+  styleUrls: ['./contact.component.css'],
+})
+export class ContactComponent implements OnInit, OnDestroy {
+  error: string | undefined;
+  successMessage: string | undefined;
+  contactForm: FormGroup;
+  loading: boolean = false;
+  submit: boolean = false;
+  subscription: Subscription;
+
+  constructor(private api: ApiService) {}
+
+  ngOnInit() {
+    this.contactForm = new FormGroup({
+      name: new FormControl(null, Validators.required),
+      email: new FormControl(null, [Validators.required, Validators.email]),
+      feedback: new FormControl(null, Validators.required),
+    });
+  }
+
+  onSubmit() {
+    this.submit = true;
+    if (this.contactForm.invalid) {
+      return;
+    }
+    this.error = '';
+    this.loading = true;
+    this.successMessage = '';
+    const requestBody = this.contactForm.value;
+    this.subscription = this.api.post('/contact', requestBody).subscribe({
+      next: (data: any) => {
+        this.successMessage = data.message;
+      },
+      error: (error) => {
+        console.log(error);
+        const errorMessage = error.response?.message || error.message;
+        this.error = errorMessage;
+        this.loading = false;
+      },
+      complete: () => {
+        this.loading = false;
+      },
+    });
+  }
+
+  ngOnDestroy() {
+    if (this.subscription) {
+      this.subscription.unsubscribe();
+    }
+  }
+}

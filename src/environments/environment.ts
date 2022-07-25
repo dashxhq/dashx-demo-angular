@@ -3,7 +3,11 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  DASHX_BASE_URI: '###DASHX_BASE_URI###',
+  DASHX_PUBLIC_KEY: '###DASHX_PUBLIC_KEY###',
+  DASHX_PRIVATE_KEY: '###DASHX_PRIVATE_KEY###',
+  DASHX_TARGET_ENVIRONMENT: '###DASHX_TARGET_ENVIRONMENT###',
 };
 
 /*
