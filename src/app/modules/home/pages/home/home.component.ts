@@ -12,11 +12,6 @@ import { ModalComponent } from 'src/app/shared/components/modal/modal.component'
   styleUrls: ['./home.component.css'],
 })
 export class HomeComponent implements OnInit, AfterContentInit {
-  // const [postsList, setPostsList] = useState([])
-  // const [isModalOpen, setIsModalOpen] = useState(false)
-  // const [error, setError] = useState('')
-  // const [fetchingPosts, setFetchingPosts] = useState(false)
-  // const [loading, setLoading] = useState(false)
   error: string | undefined;
   fetchingPosts: boolean = false;
   postsList: Post[] = [];
@@ -80,7 +75,7 @@ export class HomeComponent implements OnInit, AfterContentInit {
     });
   };
 
-  toggleBookmark = async (postId: any) => {
+  public toggleBookmark = async (postId: any) => {
     try {
       this.postsList = this.postsList.map((post) => {
         if (post.id === postId)
@@ -90,7 +85,11 @@ export class HomeComponent implements OnInit, AfterContentInit {
           };
         else return post;
       });
-      await this.api.put(`/posts/${postId}/toggle-bookmark`);
+      await this.api.put(`/posts/${postId}/toggle-bookmark`).subscribe({
+        error: (error) => {
+          console.log(error);
+        },
+      });
     } catch (error) {
       this.error = 'Unable to bookmark';
     }

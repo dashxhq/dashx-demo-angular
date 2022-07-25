@@ -17,5 +17,5 @@
   *ngIf="!postsList.length && !fetchingPosts && !error"
 ></app-empty-page>
 <div class="grid grid-cols-1 gap-3 mt-5" *ngFor="let post of postsList">
-  <app-post [post]="post" toggleBookmark="toggleBookmark(post.id)"></app-post>
+  <app-post [post]="post" [toggleBookmark]="toggleBookmark"></app-post>
 </div>

@@ -11,7 +11,7 @@
       <p class="text-sm font-medium">
         {{ post.user.first_name }} {{ post.user.last_name }}
       </p>
-      <button>
+      <button (click)="bookmarkClick(post.id)">
         <hero-icon
           name="bookmark"
           hostDisplay="inlineBlock"

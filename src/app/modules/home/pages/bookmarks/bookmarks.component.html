@@ -1,1 +1,10 @@
-<p>bookmarks works!</p>
+<h1 class="text-2xl font-semibold text-gray-900 mb-8">Bookmarks</h1>
+<app-error-box [errorMessage]="error" *ngIf="error"></app-error-box>
+<app-loader *ngIf="fetchingBookmarks"></app-loader>
+<app-empty-page
+  message="No bookmarks"
+  *ngIf="!bookmarksList.length && !fetchingBookmarks && !error"
+></app-empty-page>
+<div class="grid grid-cols-1 gap-3 mt-5" *ngFor="let bookmark of bookmarksList">
+  <app-post [post]="bookmark" [toggleBookmark]="toggleBookmark"></app-post>
+</div>
