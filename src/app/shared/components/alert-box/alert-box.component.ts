@@ -1,13 +1,11 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-alert-box',
   templateUrl: './alert-box.component.html',
   styleUrls: ['./alert-box.component.css'],
 })
-export class AlertBoxComponent implements OnInit {
+export class AlertBoxComponent {
   @Input() alertMessage: string;
   constructor() {}
-
-  ngOnInit(): void {}
 }

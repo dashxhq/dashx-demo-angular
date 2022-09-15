@@ -1,4 +1,4 @@
-import { AfterContentInit, Component, OnDestroy, OnInit } from '@angular/core';
+import { AfterContentInit, Component, OnInit } from '@angular/core';
 import jwtDecode from 'jwt-decode'
 import { Validators } from '@angular/forms';
 import { FormControl, FormGroup } from '@angular/forms';
@@ -11,7 +11,7 @@ import { Subscription } from 'rxjs';
   templateUrl: './reset-password.component.html',
   styleUrls: ['./reset-password.component.css'],
 })
-export class ResetPasswordComponent implements OnInit, AfterContentInit, OnDestroy {
+export class ResetPasswordComponent implements OnInit, AfterContentInit {
   error: string | undefined;
   successMessage: string | undefined;
   resetPasswordForm: FormGroup;
@@ -77,11 +77,5 @@ export class ResetPasswordComponent implements OnInit, AfterContentInit, OnDestr
         this.loading = false;
       },
     });
-  }
-
-  ngOnDestroy() {
-    if (this.subscription) {
-      this.subscription.unsubscribe();
-    }
   }
 }

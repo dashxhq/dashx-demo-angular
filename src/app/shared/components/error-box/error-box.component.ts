@@ -1,13 +1,11 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-error-box',
   templateUrl: './error-box.component.html',
   styleUrls: ['./error-box.component.css'],
 })
-export class ErrorBoxComponent implements OnInit {
+export class ErrorBoxComponent{
   @Input() errorMessage: string;
   constructor() {}
-
-  ngOnInit(): void {}
 }

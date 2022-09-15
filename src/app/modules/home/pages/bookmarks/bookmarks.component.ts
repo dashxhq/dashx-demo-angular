@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { ApiService } from 'src/app/core/http/api.service';
 import { Post } from 'src/app/core/models/post.model';
@@ -8,15 +8,13 @@ import { Post } from 'src/app/core/models/post.model';
   templateUrl: './bookmarks.component.html',
   styleUrls: ['./bookmarks.component.css'],
 })
-export class BookmarksComponent implements OnInit {
+export class BookmarksComponent {
   error: string | undefined;
   fetchingBookmarks: boolean = false;
   bookmarksList: Post[] = [];
   loading: boolean = false;
   subscription: Subscription;
   constructor(private api: ApiService) {}
-
-  ngOnInit(): void {}
 
   fetchBookmarks = async () => {
     this.fetchingBookmarks = true;

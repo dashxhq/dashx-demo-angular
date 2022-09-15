@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Validators } from '@angular/forms';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Subscription } from 'rxjs';
@@ -9,7 +9,7 @@ import { ApiService } from 'src/app/core/http/api.service';
   templateUrl: './forgot-password.component.html',
   styleUrls: ['./forgot-password.component.css'],
 })
-export class ForgotPasswordComponent implements OnInit, OnDestroy {
+export class ForgotPasswordComponent implements OnInit {
   error: string | undefined;
   successMessage: string | undefined;
   forgotPasswordForm: FormGroup;
@@ -50,11 +50,5 @@ export class ForgotPasswordComponent implements OnInit, OnDestroy {
         this.loading = false;
       },
     });
-  }
-
-  ngOnDestroy() {
-    if (this.subscription) {
-      this.subscription.unsubscribe();
-    }
   }
 }
