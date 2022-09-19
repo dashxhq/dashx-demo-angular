@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { Validators } from '@angular/forms';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Subscription } from 'rxjs';
 import { ApiService } from 'src/app/core/http/api.service';
 
 @Component({
@@ -15,7 +14,6 @@ export class RegisterComponent implements OnInit {
   registerForm: FormGroup;
   loading: boolean = false;
   submit: boolean = false;
-  subscription: Subscription;
 
   constructor(private api: ApiService, private router: Router) {}
 
@@ -42,7 +40,7 @@ export class RegisterComponent implements OnInit {
       email,
       password,
     };
-    this.subscription = this.api.post('/register', requestBody).subscribe({
+    this.api.post('/register', requestBody).subscribe({
       next: (data: any) => {
         this.router.navigate(['/login']);
       },

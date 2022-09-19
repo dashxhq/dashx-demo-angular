@@ -1,5 +1,4 @@
 import { AfterContentInit, Component } from '@angular/core';
-import { Subscription } from 'rxjs';
 import { ApiService } from 'src/app/core/http/api.service';
 import { Post } from 'src/app/core/models/post.model';
 
@@ -13,13 +12,12 @@ export class BookmarksComponent implements AfterContentInit {
   fetchingBookmarks: boolean = false;
   bookmarksList: Post[] = [];
   loading: boolean = false;
-  subscription: Subscription;
   constructor(private api: ApiService) {}
 
-  fetchBookmarks = async () => {
+  async fetchBookmarks() {
     this.fetchingBookmarks = true;
     this.loading = true;
-    this.subscription = this.api.get('/posts/bookmarked').subscribe({
+    this.api.get('/posts/bookmarked').subscribe({
       next: (data: any) => {
         this.bookmarksList = data.posts;
       },

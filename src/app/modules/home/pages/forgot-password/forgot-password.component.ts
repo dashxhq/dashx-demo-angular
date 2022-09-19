@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Validators } from '@angular/forms';
 import { FormControl, FormGroup } from '@angular/forms';
-import { Subscription } from 'rxjs';
 import { ApiService } from 'src/app/core/http/api.service';
 
 @Component({
@@ -15,7 +14,6 @@ export class ForgotPasswordComponent implements OnInit {
   forgotPasswordForm: FormGroup;
   loading: boolean = false;
   submit: boolean = false;
-  subscription: Subscription;
 
   constructor(private api: ApiService) {}
 
@@ -34,7 +32,7 @@ export class ForgotPasswordComponent implements OnInit {
     this.loading = true;
     this.successMessage = '';
     const requestBody = this.forgotPasswordForm.value;
-    this.subscription = this.api.post('/forgot-password', requestBody).subscribe({
+    this.api.post('/forgot-password', requestBody).subscribe({
       next: (data: any) => {
         this.successMessage = data.message;
       },

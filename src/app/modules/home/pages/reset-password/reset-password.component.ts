@@ -4,7 +4,6 @@ import { Validators } from '@angular/forms';
 import { FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { ApiService } from 'src/app/core/http/api.service';
-import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-reset-password',
@@ -18,7 +17,6 @@ export class ResetPasswordComponent implements OnInit, AfterContentInit {
   loading: boolean = false;
   resetPasswordToken: string;
   submit: boolean = false;
-  subscription: Subscription;
 
   constructor(private api: ApiService, private router: Router, private route: ActivatedRoute) {}
 
@@ -61,7 +59,7 @@ export class ResetPasswordComponent implements OnInit, AfterContentInit {
       token: this.resetPasswordToken,
       password: this.resetPasswordForm.value.password,
     };
-    this.subscription = this.api.post('/reset-password', requestBody).subscribe({
+    this.api.post('/reset-password', requestBody).subscribe({
       next: (data: any) => {
         this.successMessage = data.message;
       },

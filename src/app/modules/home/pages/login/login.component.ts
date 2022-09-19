@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { Validators } from '@angular/forms';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Subscription } from 'rxjs';
 import { ApiService } from 'src/app/core/http/api.service';
 import { AuthService } from 'src/app/core/services/auth.service';
 
@@ -16,7 +15,6 @@ export class LoginComponent implements OnInit {
   loading: boolean = false;
   loginForm: FormGroup;
   submit: boolean = false;
-  subscription: Subscription;
 
   constructor(
     private api: ApiService,
@@ -40,7 +38,7 @@ export class LoginComponent implements OnInit {
     this.error = '';
     this.loading = true;
     const requestBody = this.loginForm.value;
-    this.subscription = this.api.post('/login', requestBody).subscribe({
+    this.api.post('/login', requestBody).subscribe({
       next: (data: any) => {
         this.auth.login(data.token, requestBody.rememberMe);
       },

@@ -1,6 +1,5 @@
 import { AfterContentInit, Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { Subscription } from 'rxjs';
 import dayjs from 'dayjs';
 import { ApiService } from 'src/app/core/http/api.service';
 import { Post } from 'src/app/core/models/post.model';
@@ -16,7 +15,6 @@ export class HomeComponent implements AfterContentInit {
   fetchingPosts: boolean = false;
   postsList: Post[] = [];
   loading: boolean = false;
-  subscription: Subscription;
   constructor(private api: ApiService, public dialog: MatDialog) {}
 
   openDialog(): void {
@@ -39,9 +37,9 @@ export class HomeComponent implements AfterContentInit {
     this.fetchPosts();
   }
 
-  fetchPosts = async () => {
+  async fetchPosts() {
     this.fetchingPosts = true;
-    this.subscription = this.api.get('/posts').subscribe({
+    this.api.get('/posts').subscribe({
       next: (data: any) => {
         this.postsList = data.posts;
       },
@@ -59,7 +57,7 @@ export class HomeComponent implements AfterContentInit {
     this.error = '';
     this.loading = true;
     const values = data.value;
-    this.subscription = this.api.post('/posts', values).subscribe({
+    this.api.post('/posts', values).subscribe({
       next: async (data: any) => {
         await this.fetchPosts();
       },

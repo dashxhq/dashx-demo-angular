@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Validators } from '@angular/forms';
 import { FormControl, FormGroup } from '@angular/forms';
-import { Subscription } from 'rxjs';
 import { ApiService } from 'src/app/core/http/api.service';
 
 @Component({
@@ -15,7 +14,6 @@ export class ContactComponent implements OnInit {
   contactForm: FormGroup;
   loading: boolean = false;
   submit: boolean = false;
-  subscription: Subscription;
 
   constructor(private api: ApiService) {}
 
@@ -36,7 +34,7 @@ export class ContactComponent implements OnInit {
     this.loading = true;
     this.successMessage = '';
     const requestBody = this.contactForm.value;
-    this.subscription = this.api.post('/contact', requestBody).subscribe({
+    this.api.post('/contact', requestBody).subscribe({
       next: (data: any) => {
         this.successMessage = data.message;
       },
