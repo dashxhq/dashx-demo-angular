@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { AfterContentInit, Component } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { ApiService } from 'src/app/core/http/api.service';
 import { Post } from 'src/app/core/models/post.model';
@@ -8,7 +8,7 @@ import { Post } from 'src/app/core/models/post.model';
   templateUrl: './bookmarks.component.html',
   styleUrls: ['./bookmarks.component.css'],
 })
-export class BookmarksComponent {
+export class BookmarksComponent implements AfterContentInit {
   error: string | undefined;
   fetchingBookmarks: boolean = false;
   bookmarksList: Post[] = [];
@@ -21,7 +21,7 @@ export class BookmarksComponent {
     this.loading = true;
     this.subscription = this.api.get('/posts/bookmarked').subscribe({
       next: (data: any) => {
-        this.bookmarksList = data.bookmarks;
+        this.bookmarksList = data.posts;
       },
       error: (error) => {
         this.error = 'Unable to fetch bookmarks.';
@@ -38,7 +38,11 @@ export class BookmarksComponent {
   toggleBookmark = async (postId: any) => {
     try {
       this.bookmarksList.map((bookmark) => bookmark.id !== postId);
-      await this.api.put(`/posts/${postId}/toggle-bookmark`).subscribe();
+      this.api.put(`/posts/${postId}/toggle-bookmark`).subscribe({
+        error: (error) => {
+          console.log(error);
+        },
+      });
     } catch (error) {
       this.error = 'Unable to bookmark';
     }

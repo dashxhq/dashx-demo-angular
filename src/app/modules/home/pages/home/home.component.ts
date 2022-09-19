@@ -85,7 +85,7 @@ export class HomeComponent implements OnInit, AfterContentInit {
           };
         else return post;
       });
-      await this.api.put(`/posts/${postId}/toggle-bookmark`).subscribe({
+      this.api.put(`/posts/${postId}/toggle-bookmark`).subscribe({
         error: (error) => {
           console.log(error);
         },

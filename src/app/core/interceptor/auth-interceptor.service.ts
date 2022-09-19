@@ -7,6 +7,7 @@ import {
   HttpHeaders,
 } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { LOCAL_STORAGE_JWT_TOKEN } from '../constants/constant-local-storage';
 
 @Injectable()
 export class AuthInterceptorService implements HttpInterceptor {
@@ -17,7 +18,7 @@ export class AuthInterceptorService implements HttpInterceptor {
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
     let headers;
-    const jwtToken = localStorage.getItem('jwt-token');
+    const jwtToken = localStorage.getItem(LOCAL_STORAGE_JWT_TOKEN);
     if (jwtToken) {
       headers = new HttpHeaders({
         Authorization: `Bearer ${jwtToken}`,
