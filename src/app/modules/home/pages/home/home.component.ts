@@ -53,7 +53,7 @@ export class HomeComponent implements AfterContentInit {
     });
   };
 
-  handleSubmit = async (data: any) => {
+  handleSubmit(data: any) {
     this.error = '';
     this.loading = true;
     const values = data.value;
