@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
 import { Post } from 'src/app/core/models/post.model';
@@ -8,7 +8,7 @@ import { Post } from 'src/app/core/models/post.model';
   templateUrl: './post.component.html',
   styleUrls: ['./post.component.css'],
 })
-export class PostComponent implements OnInit {
+export class PostComponent {
   @Input() post: Post;
   @Input() toggleBookmark: (args: any) => void;
   published: any;
@@ -16,8 +16,6 @@ export class PostComponent implements OnInit {
     dayjs.extend(relativeTime);
     this.published = dayjs(this.post?.created_at).fromNow();
   }
-
-  ngOnInit(): void {}
 
   bookmarkClick = (id: any) => {
     this.toggleBookmark(id);

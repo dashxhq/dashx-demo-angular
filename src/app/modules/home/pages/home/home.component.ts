@@ -1,4 +1,4 @@
-import { AfterContentInit, Component, OnInit } from '@angular/core';
+import { AfterContentInit, Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Subscription } from 'rxjs';
 import dayjs from 'dayjs';
@@ -11,15 +11,13 @@ import { ModalComponent } from 'src/app/shared/components/modal/modal.component'
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css'],
 })
-export class HomeComponent implements OnInit, AfterContentInit {
+export class HomeComponent implements AfterContentInit {
   error: string | undefined;
   fetchingPosts: boolean = false;
   postsList: Post[] = [];
   loading: boolean = false;
   subscription: Subscription;
   constructor(private api: ApiService, public dialog: MatDialog) {}
-
-  ngOnInit(): void {}
 
   openDialog(): void {
     const dialogRef = this.dialog.open(ModalComponent, {
