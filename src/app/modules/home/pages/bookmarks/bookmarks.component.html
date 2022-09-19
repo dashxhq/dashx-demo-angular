@@ -6,5 +6,5 @@
   *ngIf="!bookmarksList?.length && !fetchingBookmarks && !error"
 ></app-empty-page>
 <div class="grid grid-cols-1 gap-3 mt-5" *ngFor="let bookmark of bookmarksList">
-  <app-post [post]="bookmark" [toggleBookmark]="toggleBookmark"></app-post>
+  <app-post [post]="bookmark"  (onBookmarkToggle)="toggleBookmark($event)"></app-post>
 </div>

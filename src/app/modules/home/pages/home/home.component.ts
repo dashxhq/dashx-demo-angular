@@ -71,7 +71,7 @@ export class HomeComponent implements AfterContentInit {
     });
   };
 
-  public toggleBookmark = async (postId: any) => {
+  toggleBookmark(postId: any) {
     try {
       this.postsList = this.postsList.map((post) => {
         if (post.id === postId)

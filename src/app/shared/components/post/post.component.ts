@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
 import { Post } from 'src/app/core/models/post.model';
@@ -10,7 +10,8 @@ import { Post } from 'src/app/core/models/post.model';
 })
 export class PostComponent {
   @Input() post: Post;
-  @Input() toggleBookmark: (args: any) => void;
+  @Output() onBookmarkToggle: EventEmitter<any> = new EventEmitter();
+
   published: any;
   constructor() {
     dayjs.extend(relativeTime);
@@ -18,6 +19,6 @@ export class PostComponent {
   }
 
   bookmarkClick = (id: any) => {
-    this.toggleBookmark(id);
+    this.onBookmarkToggle.emit(id);
   };
 }

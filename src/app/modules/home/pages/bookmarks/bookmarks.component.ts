@@ -1,6 +1,7 @@
 import { AfterContentInit, Component } from '@angular/core';
 import { ApiService } from 'src/app/core/http/api.service';
 import { Post } from 'src/app/core/models/post.model';
+import dayjs from 'dayjs';
 
 @Component({
   selector: 'app-bookmarks',
@@ -33,9 +34,9 @@ export class BookmarksComponent implements AfterContentInit {
     });
   };
 
-  toggleBookmark = async (postId: any) => {
+  toggleBookmark(postId: any) {
     try {
-      this.bookmarksList.map((bookmark) => bookmark.id !== postId);
+      this.bookmarksList = this.bookmarksList.filter((bookmark) => bookmark.id !== postId);
       this.api.put(`/posts/${postId}/toggle-bookmark`).subscribe({
         error: (error) => {
           console.log(error);
