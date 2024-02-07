@@ -7,13 +7,16 @@ import { DashxService } from './dashx.service';
   providedIn: 'root'
 })
 export class AuthService {
-  token: string;
-  currentUser: any;
+  token: string | null = null;
+  currentUser: any | null;
 
-  constructor(private dashxService: DashxService) {}
+  constructor(private dashxService: DashxService) {
+    this.token = localStorage.getItem(LOCAL_STORAGE_JWT_TOKEN)
+    this.currentUser = localStorage.getItem(LOCAL_STORAGE_USER)
+  }
 
   get isLoggedIn(): boolean {
-    return !!this.currentUser;
+    return !!this.token;
   }
 
   login(jwtToken: string, rememberMe: Boolean) {
