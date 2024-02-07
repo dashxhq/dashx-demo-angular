@@ -8,9 +8,9 @@ export class DashxService {
   dashx: any
   constructor() {
     this.dashx = DashX({
-      baseUri: process.env.DASHX_BASE_URI,
-      publicKey: process.env.DASHX_PUBLIC_KEY,
-      targetEnvironment: process.env.DASHX_TARGET_ENVIRONMENT,
+      baseUri: process.env.NG_APP_DASHX_BASE_URI,
+      publicKey: process.env.NG_APP_DASHX_PUBLIC_KEY,
+      targetEnvironment: process.env.NG_APP_DASHX_TARGET_ENVIRONMENT,
     });
   }
 }

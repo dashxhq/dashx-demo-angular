@@ -30,7 +30,7 @@ export class AuthInterceptorService implements HttpInterceptor {
       });
     }
     const apiReq = req.clone({
-      url: `https://node.dashxdemo.com${req.url}`,
+      url: `${process.env.NG_APP_API_BASE_URL}${req.url}`,
       headers: headers,
     });
     return next.handle(apiReq);

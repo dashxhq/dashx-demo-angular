@@ -1,10 +1,11 @@
 declare var process: {
   env: {
     NG_APP_ENV: 'development';
-    DASHX_BASE_URI: '###DASHX_BASE_URI###',
-    DASHX_PUBLIC_KEY: '###DASHX_PUBLIC_KEY###',
-    DASHX_PRIVATE_KEY: '###DASHX_PRIVATE_KEY###',
-    DASHX_TARGET_ENVIRONMENT: '###DASHX_TARGET_ENVIRONMENT###'
-    ENV_PRODUCTION: false
+    NG_APP_API_BASE_URL: string
+    NG_APP_DASHX_BASE_URI: string,
+    NG_APP_DASHX_PUBLIC_KEY: string,
+    NG_APP_DASHX_PRIVATE_KEY: string,
+    NG_APP_DASHX_TARGET_ENVIRONMENT: string
+    NG_APP_ENV_PRODUCTION: false
   };
 };
